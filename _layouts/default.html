@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/favicon.svg">
+
+        <link rel="stylesheet" href="/assets/pico.css">
+        <link rel="stylesheet" href="/assets/prism.css">
+        <style>
+            img:not([data-img-type="icon"]) {
+                margin: auto;
+                display: block;
+            }
+            li {
+                margin-left: 1rem;
+            }
+            math {
+                font-size: 1.25rem;
+                padding-bottom: 1.5rem;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .dark\:invert {
+                    filter: invert(100%) hue-rotate(180deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" style="padding-top: 1.5rem;">
+            <header>
+                <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+
+                {% if site.logo %}
+                  <img src="{{site.logo | relative_url}}" alt="Logo" />
+                {% endif %}
+
+                <p>{{ site.description | default: site.github.project_tagline }}</p>
+            </header>
+
+            <hr style="margin: 2rem 0;">
+
+            {% if page.url != '/' %}
+            <div style="display: inline-flex; gap: 2rem; flex-wrap: wrap;">
+                <a class="outline" style="cursor: pointer;" onclick="window.history.back()">
+                    <img src="/assets/arrow-left.svg" alt="Zpět" style="width: 1.5rem; height: 1.5rem;">
+                </a>
+                {% include breadcrumbs.html %}
+            </div>
+            <hr style="margin: 2rem 0;">
+            {% endif %}
+
+
+            {% if page.author %}
+                <h1>{{ page.author }} - {{ page.title }}</h1>
+            {% else %}
+                <h1>{{ page.title }}</h1>
+            {% endif %}
+
+            <section>
+
+            {{ content }}
+
+            {% if page.pdf %}
+                {% include pdf.html %}
+            {% endif %}
+
+            </section>
+
+            <hr style="margin: 2rem 0;">
+
+            <footer>
+                {% if site.github.is_project_page %}
+                <p>Projekt spravuje <a target="_blank" href="{{ site.github.owner_url }}">Petr Kolonicz</a></p>
+                {% endif %}
+            </footer>
+        </div>
+
+        <script src="/assets/prism.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+        <script>
+        
+        anchors.add("h1, h2, h3, h4, h5, h6")
+        
+        </script>
+    </body>
+</html>
